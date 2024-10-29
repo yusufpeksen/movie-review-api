@@ -1,11 +1,12 @@
-package controller;
+package com.yusufpeksen.movie_review.controller;
 
-import dto.request.MovieReqDto;
-import dto.response.MovieResDto;
+import com.yusufpeksen.movie_review.dto.request.MovieReqDto;
+import com.yusufpeksen.movie_review.dto.response.MovieResDto;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.MovieService;
+import com.yusufpeksen.movie_review.service.MovieService;
 
 import java.util.List;
 
@@ -20,6 +21,12 @@ public class MovieController {
     public ResponseEntity<MovieResDto> addMovie(@RequestBody MovieReqDto movieReqDto) {
         MovieResDto movieResDto = movieService.addMovie(movieReqDto);
         return ResponseEntity.ok(movieResDto);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<MovieResDto>> getAllMovies() {
+        List<MovieResDto> movies = movieService.fetchMovies();
+        return ResponseEntity.ok(movies);
     }
 
     @PutMapping("/{movieId}")
@@ -58,15 +65,12 @@ public class MovieController {
         return ResponseEntity.ok(movies);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<MovieResDto>> searchMoviesByTitle(@RequestParam String title) {
+    @GetMapping("/search/{title}")
+    public ResponseEntity<List<MovieResDto>> searchMoviesByTitle(@PathVariable String title) {
         List<MovieResDto> movies = movieService.searchMoviesByTitle(title);
         return ResponseEntity.ok(movies);
     }
 
-    @PatchMapping("/{movieId}/updateRating")
-    public ResponseEntity<Void> updateMovieRating(@PathVariable Long movieId) {
-        movieService.updateMovieRating(movieId);
-        return ResponseEntity.noContent().build();
-    }
+
+
 }

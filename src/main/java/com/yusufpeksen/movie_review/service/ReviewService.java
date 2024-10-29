@@ -1,19 +1,19 @@
-package service;
+package com.yusufpeksen.movie_review.service;
 
 import com.yusufpeksen.movie_review.utils.DtoMapperUtil;
-import dto.request.ReviewReqDto;
-import dto.response.ReviewResDto;
-import entity.Movie;
-import entity.Review;
-import exception.MovieNotFoundException;
-import exception.UsernameNotFoundException;
+import com.yusufpeksen.movie_review.dto.request.ReviewReqDto;
+import com.yusufpeksen.movie_review.dto.response.ReviewResDto;
+import com.yusufpeksen.movie_review.entity.Movie;
+import com.yusufpeksen.movie_review.entity.Review;
+import com.yusufpeksen.movie_review.exception.MovieNotFoundException;
+import com.yusufpeksen.movie_review.exception.UsernameNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import mapper.MovieResMapper;
-import mapper.ReviewReqMapper;
-import mapper.ReviewResMapper;
+import com.yusufpeksen.movie_review.mapper.ReviewReqMapper;
+import com.yusufpeksen.movie_review.mapper.ReviewResMapper;
 import org.springframework.stereotype.Service;
-import repository.MovieRepository;
-import repository.ReviewRepository;
+import com.yusufpeksen.movie_review.repository.MovieRepository;
+import com.yusufpeksen.movie_review.repository.ReviewRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +25,7 @@ public class ReviewService {
     private MovieRepository movieRepository;
     private ReviewRepository reviewRepository;
 
+    @Transactional
     public ReviewResDto addReview(Long movieId , ReviewReqDto reviewReqDto) {
         Movie movie = movieRepository.findById(movieId).orElseThrow(
                 () -> new MovieNotFoundException("Movie Not Found with given ID : " + movieId)
@@ -32,9 +33,13 @@ public class ReviewService {
 
         Review addedReview = ReviewReqMapper.INSTANCE.toReview(reviewReqDto);
         addedReview.setMovie(movie);
+
+        ReviewResDto reviewResDto = ReviewResMapper.INSTANCE.toReviewResponseDto(addedReview);
+        reviewResDto.setMovieTitle(movie.getTitle());
+
         reviewRepository.save(addedReview);
 
-        return ReviewResMapper.INSTANCE.toReviewResponseDto(addedReview);
+        return reviewResDto;
     }
 
     public List<ReviewResDto> getReviewsByMovieId(Long movieId) {

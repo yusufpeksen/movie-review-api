@@ -1,8 +1,9 @@
-package dto.response;
+package com.yusufpeksen.movie_review.dto.response;
 
-import entity.Movie;
+import com.yusufpeksen.movie_review.entity.Movie;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -11,6 +12,6 @@ public class ReviewResDto {
     private String username;
     private String comment;
     private Double rating;
-    private Movie movie;
-    private LocalDateTime reviewDate;
+    private LocalDate reviewDate;
+    private String movieTitle;
 }

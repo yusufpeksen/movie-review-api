@@ -1,14 +1,10 @@
-package mapper;
+package com.yusufpeksen.movie_review.mapper;
 
-import dto.response.MovieResDto;
-import dto.response.ReviewResDto;
-import entity.Movie;
-import entity.Review;
+import com.yusufpeksen.movie_review.dto.response.ReviewResDto;
+import com.yusufpeksen.movie_review.entity.Review;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
-
-import java.time.LocalDateTime;
 
 @Mapper
 public interface ReviewResMapper {
@@ -18,8 +14,7 @@ public interface ReviewResMapper {
     @Mapping(source = "username", target = "username")
     @Mapping(source = "comment", target = "comment")
     @Mapping(source = "rating", target = "rating")
-    @Mapping(source = "movie", target = "movie")
     @Mapping(source = "reviewDate", target = "reviewDate")
+    @Mapping(source = "movie.title", target = "movieTitle")
     ReviewResDto toReviewResponseDto(Review review);
-
 }

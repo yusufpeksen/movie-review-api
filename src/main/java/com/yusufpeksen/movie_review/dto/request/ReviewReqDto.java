@@ -1,6 +1,6 @@
-package dto.request;
+package com.yusufpeksen.movie_review.dto.request;
 
-import entity.Movie;
+import com.yusufpeksen.movie_review.entity.Movie;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -11,5 +11,5 @@ public class ReviewReqDto {
     private String username;
     private String comment;
     private Double rating;
-    private Movie movie;
+    private Long movieId;
 }

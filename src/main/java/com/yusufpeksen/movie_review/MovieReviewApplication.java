@@ -2,8 +2,10 @@ package com.yusufpeksen.movie_review;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
+@EnableJpaAuditing
 public class MovieReviewApplication {
 
 	public static void main(String[] args) {

@@ -1,11 +1,11 @@
-package controller;
+package com.yusufpeksen.movie_review.controller;
 
-import dto.request.ReviewReqDto;
-import dto.response.ReviewResDto;
+import com.yusufpeksen.movie_review.dto.request.ReviewReqDto;
+import com.yusufpeksen.movie_review.dto.response.ReviewResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.ReviewService;
+import com.yusufpeksen.movie_review.service.ReviewService;
 
 import java.util.List;
 
@@ -15,19 +15,19 @@ import java.util.List;
 public class ReviewController {
     private final ReviewService reviewService;
 
-    @PostMapping("/movie/{movieId}")
+    @PostMapping("/{movieId}")
     public ResponseEntity<ReviewResDto> addReview(@PathVariable Long movieId, @RequestBody ReviewReqDto reviewReqDto) {
         ReviewResDto reviewResDto = reviewService.addReview(movieId, reviewReqDto);
         return ResponseEntity.ok(reviewResDto);
     }
 
-    @GetMapping("/movie/{movieId}")
+    @GetMapping("/{movieId}")
     public ResponseEntity<List<ReviewResDto>> getReviewsByMovieId(@PathVariable Long movieId) {
         List<ReviewResDto> reviews = reviewService.getReviewsByMovieId(movieId);
         return ResponseEntity.ok(reviews);
     }
 
-    @GetMapping("/movie/{movieId}/sorted")
+    @GetMapping("/{movieId}/sorted")
     public ResponseEntity<List<ReviewResDto>> getSortedReviewsByMovieId(@PathVariable Long movieId) {
         List<ReviewResDto> reviews = reviewService.getSortedReviewsByMovieId(movieId);
         return ResponseEntity.ok(reviews);

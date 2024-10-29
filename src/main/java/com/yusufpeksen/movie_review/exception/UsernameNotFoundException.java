@@ -1,4 +1,4 @@
-package exception;
+package com.yusufpeksen.movie_review.exception;
 
 public class UsernameNotFoundException extends RuntimeException{
 

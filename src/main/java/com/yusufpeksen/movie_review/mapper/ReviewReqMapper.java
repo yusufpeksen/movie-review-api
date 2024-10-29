@@ -1,7 +1,7 @@
-package mapper;
+package com.yusufpeksen.movie_review.mapper;
 
-import dto.request.ReviewReqDto;
-import entity.Review;
+import com.yusufpeksen.movie_review.dto.request.ReviewReqDto;
+import com.yusufpeksen.movie_review.entity.Review;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -14,7 +14,6 @@ public interface ReviewReqMapper {
     @Mapping(source = "username", target = "username")
     @Mapping(source = "comment", target = "comment")
     @Mapping(source = "rating", target = "rating")
-    @Mapping(source = "movie", target = "movie")
     Review toReview(ReviewReqDto dto);
 
 

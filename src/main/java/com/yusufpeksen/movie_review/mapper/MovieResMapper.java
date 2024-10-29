@@ -1,10 +1,12 @@
-package mapper;
+package com.yusufpeksen.movie_review.mapper;
 
-import dto.response.MovieResDto;
-import entity.Movie;
+import com.yusufpeksen.movie_review.dto.response.MovieResDto;
+import com.yusufpeksen.movie_review.entity.Movie;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 
 @Mapper
@@ -21,5 +23,5 @@ public interface MovieResMapper {
     @Mapping(source = "reviews", target = "reviews")
     MovieResDto toMovieResponseDto(Movie movie);
 
-
+    List<MovieResDto> toMovieResponseDtoList(List<Movie> movies);
 }

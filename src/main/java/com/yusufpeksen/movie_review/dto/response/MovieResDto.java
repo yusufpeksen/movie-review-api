@@ -1,10 +1,10 @@
-package dto.response;
+package com.yusufpeksen.movie_review.dto.response;
 
-import entity.Review;
+import com.yusufpeksen.movie_review.entity.Review;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -14,8 +14,8 @@ public class MovieResDto {
     private Long id;
     private String title;
     private String genre;
-    private LocalDateTime releaseDate;
+    private LocalDate releaseDate;
     private String director;
     private Double rating;
-    private List<Review> reviews;
+    private List<ReviewResDto> reviews;
 }
